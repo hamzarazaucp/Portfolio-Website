@@ -1,0 +1,22 @@
+name: ci-workflow
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Install HTMLHint
+        run: npm install --save-dev htmlhint
+      - name: Install StyleLint
+        run: npm install --save-dev stylelint
+      - name: Lint HTML Files
+        run: npx htmlhint "**/*.html"
+      - name: Lint CSS Files
+        run: npx stylelint "**/*.css"
